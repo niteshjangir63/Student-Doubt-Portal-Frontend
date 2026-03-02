@@ -35,7 +35,7 @@ export default function TeacherDashboard() {
       {doubts <= 0 ? <h2>No Doubts</h2> : <h2>Student Doubts</h2>}
 
       {doubts.map(doubt => (
-        <Link style={{textDecoration:"none"}} key={doubt._id} to={`https://student-doubt-portal-backend.onrender.com/doubts/${doubt._id}`} >
+        <Link style={{textDecoration:"none"}} key={doubt._id} to={`/doubts/${doubt._id}`} >
         <Card
           
           title={doubt.title}
