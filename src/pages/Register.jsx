@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Loader from "../Component/Loader";
 
 import "./Register.css";
 
 export default function Register() {
+     const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -13,6 +15,7 @@ export default function Register() {
 
     const register = async () => {
         try {
+            setLoading(true);
             const res = await fetch("https://student-doubt-portal-backend.onrender.com/auth/register", {
                 method: "POST",
                 headers: {
@@ -34,6 +37,9 @@ export default function Register() {
             console.error("Error:", error);
             alert("Server error");
         }
+        finally{
+            setLoading(false);
+        }
     };
 
     return (
@@ -50,7 +56,7 @@ export default function Register() {
                     <option value="teacher">Teacher</option>
                 </select>
 
-                <button onClick={register}>Register</button>
+                <button disabled={!form.name || !form.email || !form.password} onClick={register}>{loading ? <Loader/> : "Register"}</button>
                  <span>Don't have an Account ? <Link to={"/"}>Login</Link></span>
             </div>
         </div>

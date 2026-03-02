@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./TeacherAnswerPage.css";
+import Loader from "../Component/Loader";
 
 export default function TeacherAnswerPage() {
   const { doubtId } = useParams(); 
@@ -9,6 +10,8 @@ export default function TeacherAnswerPage() {
   const [doubt, setDoubt] = useState(null);
   const [answerText, setAnswerText] = useState("");
   const token = localStorage.getItem("token");
+   const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     const fetchDoubt = async () => {
@@ -29,6 +32,7 @@ export default function TeacherAnswerPage() {
   const handleSubmitAnswer = async () => {
     if (!answerText || !token) return;
 
+    setLoading(true);
     try {
       const res = await axios.put(
         `https://student-doubt-portal-backend.onrender.com/doubts/${doubtId}`,
@@ -43,9 +47,12 @@ export default function TeacherAnswerPage() {
       console.error(err.response?.data || err.message);
       alert(err.response?.data?.message || "Error submitting answer");
     }
+    finally{
+      setLoading(false);
+    }
   };
 
-  if (!doubt) return <p>Loading...</p>;
+  if (!doubt) return <Loader/>;
 
   return (
     <div className="page">
@@ -62,7 +69,7 @@ export default function TeacherAnswerPage() {
       />
 
       <button onClick={handleSubmitAnswer} disabled={!answerText}style={{ marginTop: "10px" }}>
-        Submit Answer
+       {loading ? <Loader/> :"Submit Answer"}
       </button>
     </div>
   );

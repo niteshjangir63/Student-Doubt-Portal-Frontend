@@ -4,6 +4,7 @@ import Card from "../Component/Card";
 import "./TeacherDashboard.css";
 import { getUserFromToken } from "../utils/getUserFromToken";
 import { Link } from "react-router-dom";
+import Loader from "../Component/Loader";
 
 export default function TeacherDashboard() {
   const [doubts, setDoubts] = useState([]);
@@ -11,11 +12,13 @@ export default function TeacherDashboard() {
   const userId = user?.userId;
   const role = user?.role;
   const token = localStorage.getItem("token"); 
+   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchDoubts = async () => {
       if (!token) return;
 
+      setLoading(true);
       try {
         const res = await axios.get("https://student-doubt-portal-backend.onrender.com/doubts", {
           headers: { Authorization: `Bearer ${token}` },
@@ -25,6 +28,9 @@ export default function TeacherDashboard() {
       } catch (err) {
         console.error(err.response?.data || err.message);
       }
+      finally{
+        setLoading(false);
+      }
     };
 
     fetchDoubts();
@@ -32,7 +38,7 @@ export default function TeacherDashboard() {
 
   return (
     <div className="page">
-      {doubts <= 0 ? <h2>No Doubts</h2> : <h2>Student Doubts</h2>}
+      {doubts <= 0 ? <p>Fetching Doubts <Loader/></p> : <h2>Student Doubts</h2>}
 
       {doubts.map(doubt => (
         <Link style={{textDecoration:"none"}} key={doubt._id} to={`/doubts/${doubt._id}`} >
