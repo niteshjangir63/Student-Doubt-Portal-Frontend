@@ -15,6 +15,7 @@ import UpdatePassword from './pages/UpdatePassword'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import DoubtEdit from './pages/DoubtEdit'
+import { getUserFromToken } from './utils/getUserFromToken'
 
 
 
@@ -22,6 +23,8 @@ function App() {
 
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
+  const user = getUserFromToken();
+  const userName = user?.name;
   function logout(){
 
     localStorage.clear();
@@ -32,7 +35,7 @@ function App() {
   return (
     <>
     
-      {token && <Navbar title="Clear Doubts" onLogout={logout} />}
+      {token && <Navbar title={userName} onLogout={logout} />}
       <Routes>
 
 

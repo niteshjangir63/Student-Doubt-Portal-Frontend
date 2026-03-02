@@ -7,7 +7,7 @@ export default function Navbar({ title, onLogout, onClear }) {
   const role = user?.role;
   return (
     <nav className="mini-nav">
-      <h3 className="mini-nav-title">{title}</h3>
+      <h3 className="mini-nav-title">Hi' {title.toUpperCase()}</h3>
 
       <div className="mini-nav-actions">
 
