@@ -28,7 +28,7 @@ export default function StudentDashboard() {
       if (!token) return;
 
       try {
-        const res = await axios.get("http://localhost:8080/doubts", {
+        const res = await axios.get("https://student-doubt-portal-backend.onrender.com/doubts", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -50,7 +50,7 @@ export default function StudentDashboard() {
 
     try {
       const res = await axios.post(
-        "http://localhost:8080/doubts",
+        "https://student-doubt-portal-backend.onrender.com/doubts",
         {
           title,
           description,
@@ -80,7 +80,7 @@ export default function StudentDashboard() {
    
     try {
       await axios.delete(
-        `http://localhost:8080/doubts/delete/${doubtId}`,
+        `https://student-doubt-portal-backend.onrender.com/doubts/delete/${doubtId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -39,7 +39,7 @@ export default function UpdatePassword() {
 
     setLoading(true);
     try {
-      await axios.post("http://localhost:8080/update", {
+      await axios.post("https://student-doubt-portal-backend.onrender.com/update", {
         resetToken,
         newPassword: password,
       });

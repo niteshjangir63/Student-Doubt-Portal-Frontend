@@ -14,7 +14,7 @@ export default function TeacherAnswerPage() {
     const fetchDoubt = async () => {
       if (!token) return;
       try {
-        const res = await axios.get(`http://localhost:8080/doubts/${doubtId}`, {
+        const res = await axios.get(`https://student-doubt-portal-backend.onrender.com/doubts/${doubtId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setDoubt(res.data);
@@ -31,7 +31,7 @@ export default function TeacherAnswerPage() {
 
     try {
       const res = await axios.put(
-        `http://localhost:8080/doubts/${doubtId}`,
+        `https://student-doubt-portal-backend.onrender.com/doubts/${doubtId}`,
         { answer: answerText },
         { headers: { Authorization: `Bearer ${token}` } }
       );

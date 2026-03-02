@@ -12,7 +12,7 @@ export default function Login() {
   const handleLogin = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:8080/auth/login",
+        "https://student-doubt-portal-backend.onrender.com/auth/login",
         { email, password }
       );
 

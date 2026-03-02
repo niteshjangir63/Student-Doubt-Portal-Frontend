@@ -23,7 +23,7 @@ export default function Forgot() {
 
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:8080/send-otp", { email });
+      const res = await axios.post("https://student-doubt-portal-backend.onrender.com/send-otp", { email });
       if (res.data.success) {
 
         alert("OTP sent successfully");
@@ -48,7 +48,7 @@ export default function Forgot() {
 
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:8080/verify-otp", {
+      const res = await axios.post("https://student-doubt-portal-backend.onrender.com/verify-otp", {
         email,
         otp,
       });

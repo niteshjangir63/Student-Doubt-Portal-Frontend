@@ -17,7 +17,7 @@ export default function DoubtEdit() {
     const fetchDoubt = async () => {
       if (!token) return;
       try {
-        const res = await axios.get(`http://localhost:8080/doubts/${doubtId}`, {
+        const res = await axios.get(`https://student-doubt-portal-backend.onrender.com/doubts/${doubtId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setDoubts(res.data);
@@ -36,7 +36,7 @@ export default function DoubtEdit() {
 
     try {
       const res = await axios.put(
-        `http://localhost:8080/doubts/edit/${doubtId}`,
+        `https://student-doubt-portal-backend.onrender.com/doubts/edit/${doubtId}`,
         { title: title ,description:description},
         { headers: { Authorization: `Bearer ${token}` } }
       );
